@@ -1,8 +1,7 @@
 package com.company;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.OutputStreamWriter;
+import java.io.*;
+import java.util.*;
 
 
 public class MetaDataModule{
@@ -14,14 +13,14 @@ public class MetaDataModule{
         String dataFilePate = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + username + "/" + tablename + ".datafile";
         try{
             String str;
-            FileWriter mfw = new FileWriter(metadataPath);
-            FileWriter dfw = new FileWriter(dataFilePate);
-            mfw.append(tablename + "#");
+            FileWriter mfw = new FileWriter(metadataPath, true);
+            FileWriter dfw = new FileWriter(dataFilePate, true);
 
             for(String s : tableAttributes)
             {
                 mfw.append(s + "%");
             }
+            dfw.close();
             mfw.close();
         }
         catch (Exception e){
@@ -30,9 +29,20 @@ public class MetaDataModule{
         }
         return true;
     }
-    public static String[] getAttributes(String username, String tablename)
+    public static List<String> getAttributes(String username, String tablename)
     {
-        String[] attributes = {};
+
+        List<String> attributes = new ArrayList<>();
+        String metadataPath = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + username + "/" + tablename + ".metadata";
+        try {
+            FileReader ar = new FileReader(metadataPath);
+            BufferedReader bf = new BufferedReader(ar);
+            String atb = bf.readLine();
+            attributes = Arrays.asList(atb.split("%"));
+        }catch (Exception e)
+        {
+            System.out.println(e);
+        }
         return attributes;
     }
 }

@@ -2,6 +2,9 @@ package com.company;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class TableOperations {
@@ -36,6 +39,18 @@ public class TableOperations {
     }
     public static void add_data(String username, String tablename)
     {
-        String[] attributes = MetaDataModule.getAttributes(username, tablename);
+        Scanner scan = new Scanner(System.in);
+        List<String> attributes = MetaDataModule.getAttributes(username, tablename);
+        attributes.remove(" ");
+        List<String> dataEntry = new ArrayList<>();
+
+        for(String str : attributes)
+        {
+            System.out.print(str + " : ");
+            String data = scan.next();
+            dataEntry.add(data);
+        }
+
     }
+
 }

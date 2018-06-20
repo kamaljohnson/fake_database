@@ -93,7 +93,6 @@ public class Main {
                     try {
                         FileReader f = new FileReader(tableListPath);
                         BufferedReader br = new BufferedReader(f);
-                        StringBuffer sb = new StringBuffer();
 
                         String s = br.readLine();
 
