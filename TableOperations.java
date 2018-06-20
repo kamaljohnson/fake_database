@@ -34,4 +34,8 @@ public class TableOperations {
         }
         return tableName;
     }
+    public static void add_data(String username, String tablename)
+    {
+        String[] attributes = MetaDataModule.getAttributes(username, tablename);
+    }
 }

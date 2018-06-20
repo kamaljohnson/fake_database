@@ -30,4 +30,9 @@ public class MetaDataModule{
         }
         return true;
     }
+    public static String[] getAttributes(String username, String tablename)
+    {
+        String[] attributes = {};
+        return attributes;
+    }
 }

@@ -1,6 +1,9 @@
 package com.company;
 
+import javax.sql.rowset.spi.SyncProvider;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
 
@@ -11,6 +14,7 @@ public class Main {
         String text = new String();
         String currentUsername = "global";
         String currentTablename = "";
+        String tableListPath = "";
         String currntRootDirectory = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company";
         boolean loop = true;
         String tempUsername = "";
@@ -58,7 +62,7 @@ public class Main {
                     password = scan.next();
 
                     path = currntRootDirectory + "/all_users/" + tempUsername;
-                    String tableListPath = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + tempUsername + "/" + tempUsername + ".tableList";
+                    tableListPath = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + tempUsername + "/" + tempUsername + ".tableList";
                     dir = new File(path);
                     if(dir.mkdir())
                     {
@@ -85,11 +89,32 @@ public class Main {
                     currentTablename = TableOperations.create_table(currentUsername);
                     break;
                 case "select_table":
+                    tableListPath = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + currentUsername + "/" + currentUsername + ".tableList";
+                    try {
+                        FileReader f = new FileReader(tableListPath);
+                        BufferedReader br = new BufferedReader(f);
+                        StringBuffer sb = new StringBuffer();
+
+                        String s = br.readLine();
+
+                        String[] tableNames = s.split("#");
+                        for(String str : tableNames)
+                        {
+                            System.out.println(str.toUpperCase());
+                        }
+                        System.out.println("enter table : ");
+                        currentTablename = scan.next();
+                        f.close();
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.print(e);
+                    }
                     break;
                 case "add_data":
                     if(!currentTablename.equals(""))
                     {
-
+                        TableOperations.add_data(currentUsername, currentTablename);
                     }
                     else
                     {
