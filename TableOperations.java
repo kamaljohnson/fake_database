@@ -1,6 +1,8 @@
 package com.company;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,6 +64,34 @@ public class TableOperations {
             dfw.append(data);
             dfw.close();
             System.out.println(data);
+        }catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+    public static void display(String username, String tablename)
+    {
+        String metadataPath = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + username + "/" + tablename + ".metadata";
+        String dataFilePate = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + username + "/" + tablename + ".datafile";
+
+        try {
+            FileReader mfw = new FileReader(metadataPath);
+            BufferedReader mbf = new BufferedReader(mfw);
+            FileReader dfw = new FileReader(dataFilePate);
+            BufferedReader dbf = new BufferedReader(dfw);
+
+            String attributeString = mbf.readLine();
+            String dataString = dbf.readLine();
+            List<String> attributs = Arrays.asList(attributeString.split("%"));
+            List<String> datarow = Arrays.asList(dataString.split("%"));
+            for(String s : attributs)
+                System.out.print(s + " ");
+            System.out.println();
+            for(String d : datarow)
+                System.out.println(d);
+            mfw.close();
+            dfw.close();
+
         }catch (Exception e)
         {
             System.out.println(e);

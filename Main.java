@@ -88,6 +88,9 @@ public class Main {
                 case "create_table":
                     currentTablename = TableOperations.create_table(currentUsername);
                     break;
+                case "display_table":
+                    TableOperations.display(currentUsername, currentTablename);
+                    break;
                 case "select_table":
                     tableListPath = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + currentUsername + "/" + currentUsername + ".tableList";
                     try {
