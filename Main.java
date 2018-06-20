@@ -72,6 +72,7 @@ public class Main {
                     loop = false;
                     break;
                 case "create_table":
+                    TableOperations.create_table(currentUsername);
                     break;
                 case "add_attribute":
                     break;
