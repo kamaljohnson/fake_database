@@ -5,11 +5,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         //the main function of the program
+
         Scanner scan = new Scanner(System.in);
         String text = new String();
         String currentUsername = "global";
@@ -20,8 +24,10 @@ public class Main {
         String tempUsername = "";
         File dir;
         String path;
+        String consolString = "/DBMS/";
         while (loop)
         {
+            System.out.print(consolString + currentUsername + "/" + currentTablename + ">");
             text = scan.next();
             switch(text) {
                 case "current_user":
@@ -40,6 +46,7 @@ public class Main {
                         if(ProtectionModule.check_userPassword(tempUsername, password))
                         {
                             currentUsername = tempUsername;
+                            currentTablename = "";
                         }
                         else
                         {
@@ -99,13 +106,17 @@ public class Main {
 
                         String s = br.readLine();
 
-                        String[] tableNames = s.split("#");
+                        List<String> tableNames = Arrays.asList(s.split("#"));
                         for(String str : tableNames)
                         {
                             System.out.println(str.toUpperCase());
                         }
                         System.out.println("enter table : ");
-                        currentTablename = scan.next();
+                        String temp = scan.next();
+                        if(tableNames.contains(temp))
+                            currentTablename = temp;
+                        else
+                            System.out.println("table " +  temp + " not present in user " + currentUsername);
                         f.close();
                     }
                     catch (Exception e)
@@ -122,6 +133,15 @@ public class Main {
                     {
                         System.out.println("no table selected.(use select_table to select a table)");
                     }
+                    break;
+                case "help":
+                    System.out.println("create_user - used to create user database");
+                    System.out.println("change_user - used to change the current user to another existing user");
+                    System.out.println("create_table - used to create a table");
+                    System.out.println("select_table - used to select a table from the user base");
+                    System.out.println("add_data - used to add data according to the attribute specified for the table");
+                    System.out.println("display_table - used to display the current table");
+                    System.out.println("close - used to close the DBMS sadly");
                     break;
                 default:
                     System.out.println("syntax error");
