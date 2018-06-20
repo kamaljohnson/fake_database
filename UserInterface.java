@@ -1,9 +1,14 @@
 package com.company;
 
 public class UserInterface {
-    public static void main()
+
+    public static boolean local(String userName)
     {
-        //the interface for adding and retrieving data in console happens here
+        return false;
+    }
+    public static boolean client(String userName)
+    {
+        return false;
 
     }
 }
