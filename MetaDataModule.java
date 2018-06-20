@@ -10,21 +10,20 @@ public class MetaDataModule{
     public static boolean createMetaData(String username, String tablename, String[] tableAttributes)
     {
 
-        String currntRootDirectory = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + username + "/" + tablename + ".metadata";
-
+        String metadataPath = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + username + "/" + tablename + ".metadata";
+        String dataFilePate = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + username + "/" + tablename + ".datafile";
         try{
             String str;
-
-            File file = new File(currntRootDirectory);
-            file.createNewFile();
-            FileWriter fw = new FileWriter(currntRootDirectory);
-            fw.append(tablename + "#");
+            FileWriter mfw = new FileWriter(metadataPath);
+            FileWriter dfw = new FileWriter(dataFilePate);
+            mfw.append(tablename + "#");
 
             for(String s : tableAttributes)
             {
-                fw.append(s + "%");
+                mfw.append(s + "%");
             }
-            fw.close();
+            mfw.close();
+            dfw.close();
         }
         catch (Exception e){
             System.out.print(e);
