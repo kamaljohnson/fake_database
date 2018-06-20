@@ -14,12 +14,12 @@ public class TableOperations {
         Scanner scan = new Scanner(System.in);
         path += username;
         String tableName = "";
-        String[] tableAttributes;
+        List<String> tableAttributes = new ArrayList<>();
         System.out.print("Table name : ");
         tableName = scan.next();
         System.out.print("Attributes : ");
-        tableAttributes = scan.next().split(" ");
-
+        tableAttributes = Arrays.asList(scan.next().split(","));
+        System.out.println(tableAttributes);
         if(!MetaDataModule.createMetaData(username, tableName, tableAttributes)){
             System.out.println("error occurred while creating metadata");
             return "";

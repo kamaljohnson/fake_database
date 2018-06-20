@@ -6,7 +6,7 @@ import java.util.*;
 
 public class MetaDataModule{
 
-    public static boolean createMetaData(String username, String tablename, String[] tableAttributes)
+    public static boolean createMetaData(String username, String tablename, List<String> tableAttributes)
     {
 
         String metadataPath = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + username + "/" + tablename + ".metadata";
