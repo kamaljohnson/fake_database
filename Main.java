@@ -111,7 +111,7 @@ public class Main {
                         {
                             System.out.println(str.toUpperCase());
                         }
-                        System.out.println("enter table : ");
+                        System.out.print("enter table : ");
                         String temp = scan.next();
                         if(tableNames.contains(temp))
                             currentTablename = temp;
