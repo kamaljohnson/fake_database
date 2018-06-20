@@ -49,8 +49,23 @@ public class TableOperations {
             System.out.print(str + " : ");
             String data = scan.next();
             dataEntry.add(data);
+            dataEntry.add("|");
         }
-
+        String dataFilePate = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + username + "/" + tablename + ".datafile";
+        try {
+            FileWriter dfw = new FileWriter(dataFilePate, true);
+            dataEntry.remove(dataEntry.size()-1);
+            dataEntry.add("%");
+            String data = "";
+            for(String d : dataEntry)
+                data += d;
+            dfw.append(data);
+            dfw.close();
+            System.out.println(data);
+        }catch (Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
 }
