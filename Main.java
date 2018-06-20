@@ -1,6 +1,7 @@
 package com.company;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Main {
@@ -9,6 +10,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         String text = new String();
         String currentUsername = "global";
+        String currentTablename = "";
         String currntRootDirectory = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company";
         boolean loop = true;
         String tempUsername = "";
@@ -56,12 +58,20 @@ public class Main {
                     password = scan.next();
 
                     path = currntRootDirectory + "/all_users/" + tempUsername;
+                    String tableListPath = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + tempUsername + "/" + tempUsername + ".tableList";
                     dir = new File(path);
-
                     if(dir.mkdir())
                     {
                         System.out.println("user added.");
                         currentUsername = tempUsername;
+                        try {
+                            FileWriter f = new FileWriter(tableListPath);
+                            f.close();
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.print(e);
+                        }
                     }
                     else
                     {
@@ -72,9 +82,19 @@ public class Main {
                     loop = false;
                     break;
                 case "create_table":
-                    TableOperations.create_table(currentUsername);
+                    currentTablename = TableOperations.create_table(currentUsername);
                     break;
-                case "add_attribute":
+                case "select_table":
+                    break;
+                case "add_data":
+                    if(!currentTablename.equals(""))
+                    {
+
+                    }
+                    else
+                    {
+                        System.out.println("no table selected.(use select_table to select a table)");
+                    }
                     break;
                 default:
                     System.out.println("syntax error");

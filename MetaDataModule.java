@@ -23,7 +23,6 @@ public class MetaDataModule{
                 mfw.append(s + "%");
             }
             mfw.close();
-            dfw.close();
         }
         catch (Exception e){
             System.out.print(e);
