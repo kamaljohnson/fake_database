@@ -51,7 +51,7 @@ public class TableOperations {
             System.out.print(str + " : ");
             String data = scan.next();
             dataEntry.add(data);
-            dataEntry.add("|");
+            dataEntry.add("!");
         }
         String dataFilePate = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + username + "/" + tablename + ".datafile";
         try {
@@ -74,28 +74,69 @@ public class TableOperations {
         String metadataPath = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + username + "/" + tablename + ".metadata";
         String dataFilePate = "C:/Users/kamal/IdeaProjects/DBMS/src/com/company/all_users/" + username + "/" + tablename + ".datafile";
 
+        String attributeString = "";
+        String dataString = "";
         try {
             FileReader mfw = new FileReader(metadataPath);
             BufferedReader mbf = new BufferedReader(mfw);
             FileReader dfw = new FileReader(dataFilePate);
             BufferedReader dbf = new BufferedReader(dfw);
+            attributeString = mbf.readLine();
+            dataString = dbf.readLine();
 
-            String attributeString = mbf.readLine();
-            String dataString = dbf.readLine();
-            List<String> attributs = Arrays.asList(attributeString.split("%"));
-            List<String> datarow = Arrays.asList(dataString.split("%"));
-            for(String s : attributs)
-                System.out.print(s + " ");
-            System.out.println();
-            for(String d : datarow)
-                System.out.println(d);
             mfw.close();
             dfw.close();
+            }catch (Exception e)
+            {
+                System.out.println(e);
+            }
 
-        }catch (Exception e)
-        {
-            System.out.println(e);
-        }
+            List<String> attributs = Arrays.asList(attributeString.split("%"));
+            List<String> datarow = Arrays.asList(dataString.split("%"));
+            List<List<String>> dataentities = new ArrayList<>();
+            for(String s : datarow)
+            {
+                List<String> rowenteties = Arrays.asList(s.split("!"));
+                dataentities.add(rowenteties);
+            }
+            for(int i = 0; i < attributs.size(); i++)
+            {
+                System.out.print("+----");
+            }
+            System.out.print("+");
+            System.out.println();
+            System.out.print("|");
+            for(String s : attributs)
+            {
+                System.out.print(s + "|");
+            }
+            System.out.println();
+            for(int i = 0; i < attributs.size(); i++)
+            {
+                System.out.print("+----");
+            }
+            System.out.print("+");
+            System.out.println();
+            for(List<String> ls : dataentities)
+            {
+                System.out.print("|");
+                for(String s : ls)
+                {
+                    System.out.print(s + "|");
+                }
+                System.out.println();
+                for(int i = 0; i < attributs.size(); i++)
+                {
+                    System.out.print("+----");
+                }
+                System.out.print("+");
+                System.out.println();
+
+            }
+            System.out.println();
+
+
+
     }
 
 }
